@@ -74,10 +74,15 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["barbar.nvim"] = {
+  ["Comment.nvim"] = {
     loaded = true,
-    path = "/home/demian/.local/share/nvim/site/pack/packer/start/barbar.nvim",
-    url = "https://github.com/romgrk/barbar.nvim"
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
+  LuaSnip = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
   },
   catppuccin = {
     loaded = true,
@@ -94,60 +99,65 @@ _G.packer_plugins = {
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
-  ["cmp-path"] = {
+  ["gitsigns.nvim"] = {
     loaded = true,
-    path = "/home/demian/.local/share/nvim/site/pack/packer/start/cmp-path",
-    url = "https://github.com/hrsh7th/cmp-path"
-  },
-  ["cmp-vsnip"] = {
-    loaded = true,
-    path = "/home/demian/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
-  },
-  ["fidget.nvim"] = {
-    config = { "\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0" },
-    loaded = true,
-    path = "/home/demian/.local/share/nvim/site/pack/packer/start/fidget.nvim",
-    url = "https://github.com/j-hui/fidget.nvim"
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
   },
   ["leap.nvim"] = {
-    config = { "\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0" },
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/leap.nvim",
     url = "https://github.com/ggandor/leap.nvim"
   },
+  ["lspkind-nvim"] = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
+    url = "https://github.com/onsails/lspkind-nvim"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
+  },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
+  ["mason-lspconfig.nvim"] = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
   ["mason.nvim"] = {
-    config = { "\27LJ\2\n7\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\nmason\frequire\0" },
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
-  nerdcommenter = {
-    loaded = true,
-    path = "/home/demian/.local/share/nvim/site/pack/packer/start/nerdcommenter",
-    url = "https://github.com/preservim/nerdcommenter"
-  },
   ["null-ls.nvim"] = {
-    config = { "\27LJ\2\nl\0\1\4\0\2\0\0039\1\0\0005\3\1\0D\1\2\0\1\6\0\0\17.eslintrc.js\18.eslintrc.cjs\19.eslintrc.yaml\18.eslintrc.yml\19.eslintrc.json\18root_has_fileÊ\3\1\0\t\0\22\0-6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\3\0004\4\a\0009\5\4\0009\5\5\0059\5\6\5>\5\1\0049\5\4\0009\5\5\0059\5\a\0059\5\b\0055\a\n\0003\b\t\0=\b\v\a5\b\f\0=\b\r\aB\5\2\2>\5\2\0049\5\4\0009\5\5\0059\5\14\5>\5\3\0049\5\4\0009\5\5\0059\5\15\5>\5\4\0049\5\4\0009\5\16\0059\5\a\0059\5\b\0055\a\18\0005\b\17\0=\b\r\aB\5\2\2>\5\5\0049\5\4\0009\5\19\0059\5\20\5>\5\6\4=\4\21\3B\1\2\1K\0\1\0\fsources\nspell\15completion\1\0\0\1\5\0\0\15javascript\20javascriptreact\15typescript\20typescriptreact\16diagnostics\14rustywind\frustfmt\14filetypes\1\5\0\0\15javascript\20javascriptreact\15typescript\20typescriptreact\14condition\1\0\0\0\twith\reslint_d\vstylua\15formatting\rbuiltins\1\0\1\ndebug\2\nsetup\fnull-ls\frequire\0" },
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
     url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
-    config = { "\27LJ\2\np\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\rcheck_ts\2\vmap_cr\2\30enable_check_bracket_line\1\nsetup\19nvim-autopairs\frequire\0" },
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
+  },
+  ["nvim-bufferline.lua"] = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua",
+    url = "https://github.com/akinsho/nvim-bufferline.lua"
   },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
-  ["nvim-dap"] = {
+  ["nvim-colorizer.lua"] = {
     loaded = true,
-    path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-dap",
-    url = "https://github.com/mfussenegger/nvim-dap"
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -155,7 +165,6 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-surround"] = {
-    config = { "\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0" },
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-surround",
     url = "https://github.com/kylechui/nvim-surround"
@@ -165,10 +174,20 @@ _G.packer_plugins = {
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
+    url = "https://github.com/windwp/nvim-ts-autotag"
+  },
+  ["nvim-ts-context-commentstring"] = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
+    url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/nvim-tree/nvim-web-devicons"
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -190,11 +209,6 @@ _G.packer_plugins = {
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
     url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
   },
-  ["telescope-fzf-native.nvim"] = {
-    loaded = true,
-    path = "/home/demian/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
-    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -209,34 +223,15 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/demian/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/home/demian/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\np\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\3\rcheck_ts\2\vmap_cr\2\30enable_check_bracket_line\1\nsetup\19nvim-autopairs\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
--- Config for: null-ls.nvim
-time([[Config for null-ls.nvim]], true)
-try_loadstring("\27LJ\2\nl\0\1\4\0\2\0\0039\1\0\0005\3\1\0D\1\2\0\1\6\0\0\17.eslintrc.js\18.eslintrc.cjs\19.eslintrc.yaml\18.eslintrc.yml\19.eslintrc.json\18root_has_fileÊ\3\1\0\t\0\22\0-6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\3\0004\4\a\0009\5\4\0009\5\5\0059\5\6\5>\5\1\0049\5\4\0009\5\5\0059\5\a\0059\5\b\0055\a\n\0003\b\t\0=\b\v\a5\b\f\0=\b\r\aB\5\2\2>\5\2\0049\5\4\0009\5\5\0059\5\14\5>\5\3\0049\5\4\0009\5\5\0059\5\15\5>\5\4\0049\5\4\0009\5\16\0059\5\a\0059\5\b\0055\a\18\0005\b\17\0=\b\r\aB\5\2\2>\5\5\0049\5\4\0009\5\19\0059\5\20\5>\5\6\4=\4\21\3B\1\2\1K\0\1\0\fsources\nspell\15completion\1\0\0\1\5\0\0\15javascript\20javascriptreact\15typescript\20typescriptreact\16diagnostics\14rustywind\frustfmt\14filetypes\1\5\0\0\15javascript\20javascriptreact\15typescript\20typescriptreact\14condition\1\0\0\0\twith\reslint_d\vstylua\15formatting\rbuiltins\1\0\1\ndebug\2\nsetup\fnull-ls\frequire\0", "config", "null-ls.nvim")
-time([[Config for null-ls.nvim]], false)
--- Config for: fidget.nvim
-time([[Config for fidget.nvim]], true)
-try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
-time([[Config for fidget.nvim]], false)
--- Config for: nvim-surround
-time([[Config for nvim-surround]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18nvim-surround\frequire\0", "config", "nvim-surround")
-time([[Config for nvim-surround]], false)
--- Config for: mason.nvim
-time([[Config for mason.nvim]], true)
-try_loadstring("\27LJ\2\n7\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
-time([[Config for mason.nvim]], false)
--- Config for: leap.nvim
-time([[Config for leap.nvim]], true)
-try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\25add_default_mappings\tleap\frequire\0", "config", "leap.nvim")
-time([[Config for leap.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
