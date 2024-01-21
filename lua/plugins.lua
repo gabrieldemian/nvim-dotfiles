@@ -1,89 +1,126 @@
-local status, packer = pcall(require, "packer")
-if not status then
-	print("Packer is not installed")
-	return
-end
+local source_mapping = {
+	buffer = "[Buffer]",
+	nvim_lsp = "[LSP]",
+	nvim_lua = "[Lua]",
+	cmp_ai = "[AI]",
+	path = "[Path]",
+}
 
-vim.cmd([[packadd packer.nvim]])
-
-packer.startup(function(use)
-	use("wbthomason/packer.nvim")
-	use({ "catppuccin/nvim", as = "catppuccin" })
-	use("nvim-lua/plenary.nvim") -- Common utilities
-	use("onsails/lspkind-nvim") -- vscode-like pictograms
-
-	-- cmp plugins
-	use("hrsh7th/cmp-nvim-lsp") -- nvim-cmp source for neovim's built-in LSP
-	use("hrsh7th/cmp-buffer") -- nvim-cmp source for buffer words
-	use("hrsh7th/cmp-path") -- nvim-cmp source for buffer words
-	use("hrsh7th/cmp-cmdline") -- Completion
-	use("saadparwaiz1/cmp_luasnip")
-	use("hrsh7th/nvim-cmp") -- Completion
-	use("hrsh7th/cmp-emoji") -- nvim-cmp source for emojis
-	use("FelipeLema/cmp-async-path") -- nvim-cmp source for async path
-	--
-
-	use("David-Kunz/gen.nvim")
-
-	use("folke/neodev.nvim")
-	use({ "neovim/nvim-lspconfig", requires = { "folke/neodev.nvim" } }) -- LSP
-	use("jose-elias-alvarez/null-ls.nvim") -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-	use("williamboman/mason.nvim")
-	use("williamboman/mason-lspconfig.nvim")
-
-	use("L3MON4D3/LuaSnip")
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			require("nvim-treesitter.install").update({ with_sync = true })
+return {
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
+		config = function()
+			-- load the colorscheme here
+			vim.cmd([[colorscheme catppuccin-macchiato]])
 		end,
-	})
-
-	use("mfussenegger/nvim-dap")
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use("simrat39/rust-tools.nvim")
-
-	use("kyazdani42/nvim-web-devicons") -- File icons
-	use("nvim-telescope/telescope.nvim")
-	use("nvim-telescope/telescope-file-browser.nvim")
-	use("nvim-telescope/telescope-ui-select.nvim")
-	use("windwp/nvim-autopairs")
-	use("windwp/nvim-ts-autotag")
-	use({
+	},
+	{ "folke/which-key.nvim", lazy = true },
+	{ "folke/neoconf.nvim", cmd = "Neoconf" },
+	"nvim-lua/plenary.nvim",
+	{
+		"Wansmer/treesj",
+		keys = {
+			{ "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
+		},
+		opts = { use_default_keymaps = false, max_join_length = 150 },
+	},
+	"folke/neodev.nvim",
+	{
+		"williamboman/mason.nvim",
+		opts = {
+			ui = {
+				icons = {
+					package_installed = "",
+					package_pending = "",
+					package_uninstalled = "",
+				},
+			},
+		},
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		opts = {
+			automatic_installation = true,
+			ensure_installed = { "lua_ls", "rust_analyzer" },
+		},
+	},
+	"L3MON4D3/LuaSnip",
+	"simrat39/rust-tools.nvim",
+	{
+		"kyazdani42/nvim-web-devicons",
+		opts = {
+			default = false,
+		},
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "VeryLazy",
+		opts = {
+			disable_filetype = { "TelescopePrompt", "vim" },
+		},
+	},
+	"windwp/nvim-ts-autotag",
+	{
 		"numToStr/Comment.nvim",
-		requires = {
+		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
-	})
-	use("norcalli/nvim-colorizer.lua")
-	use("folke/zen-mode.nvim")
-	use({
+	},
+	{
+		"norcalli/nvim-colorizer.lua",
+		opts = {
+			"*",
+		},
+	},
+	{
+		"folke/zen-mode.nvim",
+		keys = { "<C-w>o" },
+	},
+	{
 		"iamcco/markdown-preview.nvim",
-		run = function()
+		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-	})
-	use("akinsho/nvim-bufferline.lua")
+	},
+	{ "lewis6991/gitsigns.nvim", lazy = true },
+	{ "mbbill/undotree", lazy = true },
+	{ "tpope/vim-fugitive", lazy = true,
 
-	use("lewis6991/gitsigns.nvim")
-	use("mbbill/undotree")
-	use("tpope/vim-fugitive")
-
-	use("ggandor/leap.nvim")
-
-	use({
+    opts = {
+  keymaps = {
+    -- Open git blame window
+    blame = "<leader>gb",
+    -- Open file/folder in git repository
+    browse = "<leader>go",
+  }
+    }
+  },
+	{ "ggandor/leap.nvim",
+    config = function()
+      require("leap").add_default_mappings()
+    end
+  },
+	{
 		"kylechui/nvim-surround",
-		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-	})
-
-	use("RRethy/vim-illuminate")
-
-	use({
-		"saecki/crates.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
-	})
-
-	use("glepnir/lspsaga.nvim") -- LSP UIs
-end)
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+	},
+	{ "RRethy/vim-illuminate",
+    -- opts = {
+    --   providers = {
+    --     "lsp",
+    --     "treesitter",
+    --     "regex",
+    --   },
+    --   delay = 100,
+    --   filetype_overrides = {},
+    --   filetypes_denylist = {
+    --     "dirbuf",
+    --     "dirvish",
+    --     "fugitive",
+    --   },
+    -- }
+  },
+}

@@ -9,6 +9,5 @@ opt.shiftwidth = 2
 opt.softtabstop = 0
 opt.expandtab = true
 opt.swapfile = false
-vim.cmd([[silent! colorscheme catppuccin-macchiato]])
 vim.cmd([[set cursorline]])
 vim.cmd([[highlight CursorLineNr gui=bold guifg=Pink]])
