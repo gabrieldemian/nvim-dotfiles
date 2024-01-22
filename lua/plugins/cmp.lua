@@ -1,3 +1,11 @@
+local source_mapping = {
+  buffer = "[Buffer]",
+  nvim_lsp = "[LSP]",
+  nvim_lua = "[Lua]",
+  cmp_ai = "[AI]",
+  path = "[Path]",
+}
+
 return {
 	{
 		"hrsh7th/nvim-cmp",
@@ -79,7 +87,7 @@ return {
 						-- if you have lspkind installed, you can use it like
 						-- in the following line:
 						vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
-						-- vim_item.menu = source_mapping[entry.source.name]
+						vim_item.menu = source_mapping[entry.source.name]
 						if entry.source.name == "cmp_ai" then
 							local detail = (entry.completion_item.labelDetails or {}).detail
 							vim_item.kind = ""

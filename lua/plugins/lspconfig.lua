@@ -1,204 +1,125 @@
-local opts = { noremap = true, silent = true }
+-- local opts = { noremap = true, silent = true }
 
 return {
-	"neovim/nvim-lspconfig",
+  "neovim/nvim-lspconfig",
   event = "VeryLazy",
-	-- dependencies = { "folke/neodev.nvim" },
   dependencies = {
-      -- { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-      { "folke/neodev.nvim", opts = {} },
-      "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-    },
-	config = function()
-		-- local nvim_lsp = require("lspconfig")
-		local protocol = require("vim.lsp.protocol")
-		local lsp = vim.lsp
-		local handlers = lsp.handlers
-		local pop_opts = { border = "rounded", max_width = 80 }
+    { "folke/neodev.nvim" },
+    "mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  },
+  config = function()
+    HOME_PATH = os.getenv("HOME") .. "/"
+    MASON_PATH = HOME_PATH .. ".local/share/nvim/mason/packages/"
+    local codelldb_path = MASON_PATH .. "codelldb/extension/adapter/codelldb"
+    local liblldb_path = MASON_PATH .. "codelldb/extension/lldb/lib/liblldb.so"
 
-		handlers["textDocument/hover"] = lsp.with(handlers.hover, pop_opts)
-		handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-			underline = true,
-			update_in_insert = false,
-			virtual_text = { spacing = 4, prefix = "●" },
-			severity_sort = true,
-		})
+    local lspconfig = require('lspconfig')
 
-		-- Use an on_attach function to only map the following keys
-		-- after the language server attaches to the current buffer
-		local on_attach = function(client, bufnr)
-			local function buf_set_keymap(...)
-				vim.api.nvim_buf_set_keymap(bufnr, ...)
-			end
+    lspconfig.lua_ls.setup {}
 
-			--Enable completion triggered by <c-x><c-o>
-			--local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-			--buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    Map('n', '<leader>e', vim.diagnostic.open_float)
+    Map('n', '[d', vim.diagnostic.goto_prev)
+    Map('n', ']d', vim.diagnostic.goto_next)
+    Map('n', '<space>q', vim.diagnostic.setloclist)
 
-			-- See `:help vim.lsp.*` for documentation on any of the below functions
-			-- buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-			-- buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-			buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-			-- map('n', 'K', vim.lsp.buf.hover, opts)
-		end
+    -- Use LspAttach autocommand to only map the following keys
+    -- after the language server attaches to the current buffer
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+      callback = function(ev)
+        -- Enable completion triggered by <c-x><c-o>
+        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-		protocol.CompletionItemKind = {
-			"", -- Text
-			"", -- Method
-			"", -- Function
-			"", -- Constructor
-			"", -- Field
-			"", -- Variable
-			"", -- Class
-			"ﰮ", -- Interface
-			"", -- Module
-			"", -- Property
-			"", -- Unit
-			"", -- Value
-			"", -- Enum
-			"", -- Keyword
-			"﬌", -- Snippet
-			"", -- Color
-			"", -- File
-			"", -- Reference
-			"", -- Folder
-			"", -- EnumMember
-			"", -- Constant
-			"", -- Struct
-			"", -- Event
-			"ﬦ", -- Operator
-			"", -- TypeParameter
-		}
+        -- Buffer local mappings.
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local opts = { buffer = ev.buf }
 
-		-- Set up completion using nvim_cmp with LSP source
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        -- handled by Lspsaga
+        --
+        -- Map('n', 'gD', vim.lsp.buf.declaration, opts)
+        -- Map('n', 'gd', vim.lsp.buf.definition, opts)
+        -- Map('n', 'K', vim.lsp.buf.hover, opts)
+        -- Map('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        -- Map('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+        -- Map('n', '<leader>rn', vim.lsp.buf.rename, opts)
+        -- Map({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+        -- Map('n', 'gi', vim.lsp.buf.implementation, opts)
+        -- Map('n', 'gr', vim.lsp.buf.references, opts)
+        Map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+        Map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+        Map('n', '<leader>wl', function()
+          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opts)
+        Map('n', '<leader>f', function()
+          vim.lsp.buf.format { async = true }
+        end, opts)
+      end,
+    })
 
-		-- nvim_lsp.flow.setup({
-		-- 	on_attach = on_attach,
-		-- 	capabilities = capabilities,
-		-- })
-		--
-		-- nvim_lsp.tsserver.setup({
-		-- 	on_attach = on_attach,
-		-- 	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-		-- 	cmd = { "typescript-language-server", "--stdio" },
-		-- 	capabilities = capabilities,
-		-- })
-		--
-		-- nvim_lsp.sourcekit.setup({
-		-- 	on_attach = on_attach,
-		-- 	capabilities = capabilities,
-		-- })
-		--
-		-- nvim_lsp.lua_ls.setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = function(client, bufnr)
-		-- 		on_attach(client, bufnr)
-		-- 		-- enable_format_on_save(client, bufnr)
-		-- 	end,
-		-- 	settings = {
-		-- 		Lua = {
-		-- 			diagnostics = {
-		-- 				-- Get the language server to recognize the `vim` global
-		-- 				globals = { "vim" },
-		-- 			},
-		-- 			workspace = {
-		-- 				-- Make the server aware of Neovim runtime files
-		-- 				library = vim.api.nvim_get_runtime_file("", true),
-		-- 				checkThirdParty = false,
-		-- 			},
-		-- 		},
-		-- 	},
-		-- })
-		--
-		-- nvim_lsp.tailwindcss.setup({
-		-- 	on_attach = on_attach,
-		-- 	capabilities = capabilities,
-		-- })
-		--
-		-- nvim_lsp.cssls.setup({
-		-- 	on_attach = on_attach,
-		-- 	capabilities = capabilities,
-		-- })
-		--
-		-- nvim_lsp.astro.setup({
-		-- 	on_attach = on_attach,
-		-- 	capabilities = capabilities,
-		-- })
+    local r = lspconfig.rust_analyzer
 
-		local rt = require("rust-tools")
-		HOME_PATH = os.getenv("HOME") .. "/"
-		MASON_PATH = HOME_PATH .. ".local/share/nvim/mason/packages/"
-		local codelldb_path = MASON_PATH .. "codelldb/extension/adapter/codelldb"
-		local liblldb_path = MASON_PATH .. "codelldb/extension/lldb/lib/liblldb.so"
+    local protocol = require("vim.lsp.protocol")
 
-		rt.setup({
-			tools = {
-				runnables = {
-					use_telescope = true,
-				},
-				hover_actions = {
-					auto_focus = true,
-				},
-				inlay_hints = {
-					auto = true,
-					show_parameter_hints = true,
-					parameter_hints_prefix = "",
-					other_hints_prefix = "",
-				},
-			},
-			server = {
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-				on_attach = function(_, bufnr)
-					rt.hover_actions.auto_focus = true
-					Map("n", "K", rt.hover_actions.hover_actions, { buffer = bufnr })
-					-- Hover actions
-					Map("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-					-- Code action groups
-					Map("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-				end,
-				["rust-analyzer"] = {
-					checkOnSave = {
-						command = "clippy",
-					},
-					rustfmt = {
-						extraArgs = { "+nightly" },
-					},
-					cargo = {
-						loadOutDirsFromCheck = true,
-					},
-					procMacro = {
-						enable = true,
-					},
-				},
-			},
-			dap = {
-				adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-			},
-		})
+    -- Diagnostic symbols in the sign column (gutter)
+    local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
 
-		-- Diagnostic symbols in the sign column (gutter)
-		local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
+    vim.diagnostic.config({
+      virtual_text = {
+        prefix = "●",
+      },
+      signs = true,
+      update_in_insert = true,
+      underline = true,
+      severity_sort = false,
+      float = {
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+      },
+    })
 
-		vim.diagnostic.config({
-			virtual_text = {
-				prefix = "●",
-			},
-			signs = true,
-			update_in_insert = true,
-			underline = true,
-			severity_sort = false,
-			float = {
-				border = "rounded",
-				source = "always",
-				header = "",
-				prefix = "",
-			},
-		})
-	end,
+    r.setup {
+      tools = {
+        runnables = {
+          use_telescope = true,
+        },
+        inlay_hints = {
+          auto = true,
+          show_parameter_hints = false,
+          parameter_hints_prefix = "",
+          other_hints_prefix = "",
+        },
+      },
+      cmd = {
+        "rustup", "run", "nightly", "rust-analyzer"
+      },
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      on_attach = function(client, bufnr)
+        r.hover_actions.auto_focus = true
+        --
+        -- handled by Lspsaga
+        --
+        -- vim.keymap.set("n", "K", r.hover_actions.hover_actions, { buffer = bufnr })
+        -- Hover actions
+        -- vim.keymap.set("n", "<C-space>", r.hover_actions.hover_actions, { buffer = bufnr })
+        -- Code action groups
+        -- vim.keymap.set("n", "<leader>a", r.code_action_group.code_action_group, { buffer = bufnr })
+      end,
+      filetypes = { "rust" },
+      settings = {
+        ["rust-analyzer"] = {
+          cargo = { allFeatures = true },
+        }
+      },
+      dap = {
+        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+      },
+    }
+  end
 }

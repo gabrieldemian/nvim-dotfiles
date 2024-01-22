@@ -19,7 +19,7 @@ vim.api.nvim_set_hl(0, "LeapLabelSecondary", {
 Map("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- keep cursor in place
-Map("n", "J", "mzJ`z")
+-- Map("n", "J", "mzJ`z")
 Map("x", "<leader>p", '"_dP')
 
 -- Copy to clipboard
@@ -28,11 +28,6 @@ Map("v", "<leader>y", '"+y')
 Map("n", "<leader>Y", '"+Y')
 
 Map("n", "x", '"_x')
-
--- Format
-Map("n", "<leader>f", function()
-	vim.lsp.buf.format({ async = true })
-end, { silent = true })
 
 -- Git (vim-fugitive)
 Map("n", "<leader>gs", vim.cmd.Git)
@@ -47,8 +42,3 @@ Map("n", "<leader>rd", vim.cmd.Gread)
 
 -- Git blame
 Map("n", "<leader>gb", "<Cmd>G blame<CR>")
-
--- Zen mode
-Map("n", "<C-w>o", "<cmd>ZenMode<cr>", { silent = true })
-
-Map("n", "K", "<cmd>Lspsaga hover_doc<CR>")

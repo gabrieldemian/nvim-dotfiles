@@ -10,4 +10,4 @@ opt.softtabstop = 0
 opt.expandtab = true
 opt.swapfile = false
 vim.cmd([[set cursorline]])
-vim.cmd([[highlight CursorLineNr gui=bold guifg=Pink]])
+-- vim.cmd([[highlight CursorLineNr gui=bold guifg=Pink]])
