@@ -7,6 +7,9 @@ return {
     'nvim-tree/nvim-web-devicons'
   },
   opts = {
+    code_actions = {
+      extend_gitsigns = true
+    },
     lightbulb = {
       enable_in_insert = false,
       enable = false,

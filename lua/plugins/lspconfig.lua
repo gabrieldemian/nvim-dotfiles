@@ -17,6 +17,7 @@ return {
     local lspconfig = require('lspconfig')
 
     lspconfig.lua_ls.setup {}
+    lspconfig.pyright.setup {}
 
     Map('n', '<leader>e', vim.diagnostic.open_float)
     Map('n', '[d', vim.diagnostic.goto_prev)
