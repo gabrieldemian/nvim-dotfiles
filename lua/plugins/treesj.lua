@@ -16,7 +16,7 @@ return {
     ---start - cursor jumps to the first symbol of the node being formatted
     ---end - cursor jumps to the last symbol of the node being formatted
     ---@type 'hold'|'start'|'end'
-    cursor_behavior = 'hold',
+    cursor_behavior = "hold",
     ---@type boolean Notify about possible problems or not
     notify = true,
     ---@type boolean Use `dot` for repeat action

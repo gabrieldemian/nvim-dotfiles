@@ -1,5 +1,12 @@
 return {
 	{ "folke/neoconf.nvim", cmd = "Neoconf" },
+	-- {
+	-- 	"nyoom-engineering/oxocarbon.nvim",
+	-- 	config = function()
+ --      vim.opt.background = "dark"
+	-- 		vim.cmd([[colorscheme oxocarbon]])
+	-- 	end,
+	-- },
 	"nvim-lua/plenary.nvim",
 	"folke/neodev.nvim",
 	"L3MON4D3/LuaSnip",

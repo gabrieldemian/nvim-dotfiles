@@ -1,7 +1,7 @@
 return {
-	{
-		"mfussenegger/nvim-dap",
-		event = "VeryLazy",
+  {
+    "mfussenegger/nvim-dap",
+    event = "VeryLazy",
     keys = {
       { "<leader>dt", ":DapToggleBreakpoint<CR>" },
       { "<leader>dx", ":DapTerminate<CR>" },
@@ -20,8 +20,7 @@ return {
       dap.listeners.before.event_exited["dapui_config"] = function()
         dapui.close()
       end
-    end
-	},
-	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+    end,
+  },
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
 }
-

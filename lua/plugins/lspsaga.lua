@@ -24,7 +24,7 @@ return {
   },
   keys = {
     { "<leader>ca", "<cmd>Lspsaga code_action<cr>",           opts },
-    { "<leader>bf", "<cmd>Lspsaga show_buf_diagnostics<cc>",  opts },
+    { "<leader>bf", "<cmd>Lspsaga show_buf_diagnostics<cr>",  opts },
     { "<C-j>",      "<cmd>Lspsaga diagnostic_jump_next<cr>",  opts },
     { "<leader>d",  "<cmd>Lspsaga show_line_diagnostics<cr>", opts },
     { "gT",         "<cmd>Lspsaga goto_type_definition<cr>",  opts },

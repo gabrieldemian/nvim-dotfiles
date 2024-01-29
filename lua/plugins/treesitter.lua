@@ -1,5 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = false,
   config = function()
     require("nvim-treesitter.install").update({ with_sync = true })
     local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
@@ -15,6 +16,7 @@ return {
       disable = {},
     },
     ensure_installed = {
+      "rust",
       "markdown",
       "markdown_inline",
       "tsx",

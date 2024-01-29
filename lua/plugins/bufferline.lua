@@ -1,6 +1,7 @@
 return {
 	"akinsho/nvim-bufferline.lua",
 	opts = {
+		diagnostics = "nvim-lsp",
 		options = {
 			mode = "tabs",
 			separator_style = "slant",
@@ -13,5 +14,10 @@ return {
 	keys = {
 		{ "<Tab>", "<Cmd>BufferLineCycleNext<CR>" },
 		{ "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>" },
+		{ "<C-p>", "<Cmd>BufferLinePick<CR>" },
+		{ "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>" },
+		{ "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>" },
+		{ "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>" },
+		{ "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>" },
 	},
 }

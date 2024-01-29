@@ -18,22 +18,23 @@ return {
         theme = "dropdown",
         -- disables netrw and use telescope-file-browser in its place
         hijack_netrw = true,
-        -- mappings = {
-        --   ["i"] = {
-        --     -- ["<C-c>"] = fb.actions.create,
-        --     ["<C-c>"] = "require('telescope').extensions.file_browser.actions.create",
-        --     -- ["<C-p>"] = fb.actions.goto_parent_dir,
-        --     -- ["<C-w>"] = fb.actions.goto_cwd,
-        --     -- ["<C-r>"] = fb.actions.rename,
-        --     -- ["<C-d>"] = fb.actions.remove,
-        --   },
-        --   -- ["n"] = {
-        --   --   ["c"] = fb.actions.create,
-        --   --   ["p"] = fb.actions.goto_parent_dir,
-        --   --   ["r"] = fb.actions.rename,
-        --   --   ["d"] = fb.actions.remove,
-        --   -- },
-        -- },
+        mappings = {
+          ["i"] = {
+            ["<C-h>"] = "which_key",
+            --     -- ["<C-c>"] = fb.actions.create,
+            --     ["<C-c>"] = "require('telescope').extensions.file_browser.actions.create",
+            --     -- ["<C-p>"] = fb.actions.goto_parent_dir,
+            --     -- ["<C-w>"] = fb.actions.goto_cwd,
+            --     -- ["<C-r>"] = fb.actions.rename,
+            --     -- ["<C-d>"] = fb.actions.remove,
+          },
+          --   -- ["n"] = {
+          --   --   ["c"] = fb.actions.create,
+          --   --   ["p"] = fb.actions.goto_parent_dir,
+          --   --   ["r"] = fb.actions.rename,
+          --   --   ["d"] = fb.actions.remove,
+          --   -- },
+        },
       },
     },
   },
@@ -85,6 +86,5 @@ return {
         layout_config = { height = 40 },
       })
     end)
-  end
+  end,
 }
-

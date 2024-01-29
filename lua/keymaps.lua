@@ -1,19 +1,19 @@
 -- Leap Highlight
 vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" }) -- or some grey
 vim.api.nvim_set_hl(0, "LeapMatch", {
-	-- For light themes, set to 'black' or similar.
-	fg = "white",
-	bold = true,
-	nocombine = true,
+  -- For light themes, set to 'black' or similar.
+  fg = "white",
+  bold = true,
+  nocombine = true,
 })
 -- Specify some nicer shades instead of the default "red" and "blue".
 vim.api.nvim_set_hl(0, "LeapLabelPrimary", {
-	fg = "yellow",
-	bold = true,
-	nocombine = true,
+  fg = "yellow",
+  bold = true,
+  nocombine = true,
 })
 vim.api.nvim_set_hl(0, "LeapLabelSecondary", {
-	fg = "pink",
+  fg = "pink",
 })
 
 Map("n", "<leader>u", vim.cmd.UndotreeToggle)
