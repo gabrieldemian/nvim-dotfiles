@@ -1,4 +1,5 @@
 Map = vim.keymap.set
+-- print(vim.fn.expand("%:p") .. "/target/debug/")
 
 -- get lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
